@@ -27,6 +27,10 @@ npm run setupDevWorkspace
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 ## Workspace configuration
-This report requires that a tag group named "Opportunity costs" (case insensitive) exists on the workspace. This tag group is intended to be used on "Project" factsheets and should be configured as "Single" mode.
+This report requires that a tag group named "Opportunity costs" (case insensitive) exists on the workspace.
+
+This tag group is intended to be used on "Project" factsheets and should be configured as "Single" mode.
+
 Moreover, this tag group must contain the a set of 4 tags named "low", "medium", "high" and "very high".
+
 A test dataset can be loaded on a develoment workspace by running the ```npm run setupDevWorkspace``` command.
