@@ -19,7 +19,6 @@ npm run build --report
 
 # upload report to LeanIX
 npm run upload
-```
 
 # load the workspace with a demo dataset (warning: will delete all pre-existing workspace factsheets!!!)
 npm run setupDevWorkspace
