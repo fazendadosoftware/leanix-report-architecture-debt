@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Project A",
+    "externalId": "projectA",
+    "budgetOpEx": "0",
+    "budgetCapEx": "0",
+    "tags": ["low"],
+    "lifecycle": "plan"
+  },
+  {
+    "name": "Project B",
+    "externalId": "projectB",
+    "budgetOpEx": "1",
+    "budgetCapEx": "0",
+    "tags": ["low"],
+    "lifecycle": "plan"
+  },
+  {
+    "name": "Project C",
+    "externalId": "projectC",
+    "budgetOpEx": "2",
+    "budgetCapEx": "0",
+    "tags": ["low"],
+    "lifecycle": "plan"
+  },
+  {
+    "name": "Project D",
+    "externalId": "projectD",
+    "budgetOpEx": "3",
+    "budgetCapEx": "0",
+    "tags": ["low"],
+    "lifecycle": "plan"
+  },
+  {
+    "name": "Project E",
+    "externalId": "projectE",
+    "budgetOpEx": "0",
+    "budgetCapEx": "0.1",
+    "tags": ["medium"],
+    "lifecycle": "plan"
+  },
+  {
+    "name": "Project F",
+    "externalId": "projectF",
+    "budgetOpEx": "0",
+    "budgetCapEx": "0.1",
+    "tags": ["high"],
+    "lifecycle": "plan"
+  },
+  {
+    "name": "Project G",
+    "externalId": "projectG",
+    "budgetOpEx": "0",
+    "budgetCapEx": "0.1",
+    "tags": ["very high"],
+    "lifecycle": "plan"
+  },
+  {
+    "name": "Project H",
+    "externalId": "projectH",
+    "budgetOpEx": "0",
+    "budgetCapEx": "0.1",
+    "tags": ["low"],
+    "lifecycle": "plan"
+  },
+  {
+    "name": "Project I",
+    "externalId": "projectI",
+    "budgetOpEx": "0",
+    "budgetCapEx": "0.1",
+    "tags": ["low"],
+    "lifecycle": "plan"
+  },
+  {
+    "name": "Project J",
+    "externalId": "projectJ",
+    "budgetOpEx": "0",
+    "budgetCapEx": "0.1",
+    "tags": ["low"],
+    "lifecycle": "plan"
+  }
+]

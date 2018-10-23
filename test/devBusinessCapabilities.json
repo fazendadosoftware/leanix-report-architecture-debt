@@ -1,0 +1,114 @@
+[
+  {
+    "name": "Business Capability A",
+    "projects": ["projectA"]
+  },
+  {
+    "name": "Business Capability B0",
+    "projects": ["projectB"]
+  },
+  {
+    "name": "Business Capability B1",
+    "projects": ["projectB", "projectH"]
+  },
+  {
+    "name": "Business Capability C0",
+    "projects": ["projectC"]
+  },
+  {
+    "name": "Business Capability C1",
+    "projects": ["projectC", "projectH"]
+  },
+  {
+    "name": "Business Capability C2",
+    "projects": ["projectC", "projectH", "projectI"]
+  },
+  {
+    "name": "Business Capability D0",
+    "projects": ["projectD"]
+  },
+  {
+    "name": "Business Capability D1",
+    "projects": ["projectD", "projectH"]
+  },
+  {
+    "name": "Business Capability D2",
+    "projects": ["projectD", "projectH", "projectI"]
+  },
+  {
+    "name": "Business Capability D3",
+    "projects": ["projectD", "projectH", "projectI", "projectJ"]
+  },
+  {
+    "name": "Business Capability E0",
+    "projects": ["projectA", "projectE"]
+  },
+  {
+    "name": "Business Capability E1",
+    "projects": ["projectA", "projectE"]
+  },
+  {
+    "name": "Business Capability F",
+    "projects": ["projectB", "projectE"]
+  },
+  {
+    "name": "Business Capability G",
+    "projects": ["projectC", "projectE"]
+  },
+  {
+    "name": "Business Capability H",
+    "projects": ["projectD", "projectE"]
+  },
+  {
+    "name": "Business Capability I0",
+    "projects": ["projectA", "projectE", "projectF"]
+  },
+  {
+    "name": "Business Capability I1",
+    "projects": ["projectA", "projectE", "projectF"]
+  },
+  {
+    "name": "Business Capability I2",
+    "projects": ["projectA", "projectE", "projectF"]
+  },
+  {
+    "name": "Business Capability J",
+    "projects": ["projectB", "projectE", "projectF"]
+  },
+  {
+    "name": "Business Capability K",
+    "projects": ["projectC", "projectE", "projectF"]
+  },
+  {
+    "name": "Business Capability L",
+    "projects": ["projectD", "projectE", "projectF"]
+  },
+  {
+    "name": "Business Capability M0",
+    "projects": ["projectA", "projectE", "projectF", "projectG"]
+  },
+  {
+    "name": "Business Capability M1",
+    "projects": ["projectA", "projectE", "projectF", "projectG"]
+  },
+  {
+    "name": "Business Capability M2",
+    "projects": ["projectA", "projectE", "projectF", "projectG"]
+  },
+    {
+    "name": "Business Capability M1",
+    "projects": ["projectA", "projectE", "projectF", "projectG"]
+  },
+  {
+    "name": "Business Capability N",
+    "projects": ["projectB", "projectE", "projectF", "projectG"]
+  },
+  {
+    "name": "Business Capability O",
+    "projects": ["projectC", "projectE", "projectF", "projectG"]
+  },
+  {
+    "name": "Business Capability P",
+    "projects": ["projectD", "projectE", "projectF", "projectG"]
+  }
+]
