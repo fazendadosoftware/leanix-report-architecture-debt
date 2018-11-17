@@ -37,7 +37,7 @@
       />
       -->
     </transition>
-    <img class="logo" src="./assets/Deloitte-logo-black.svg">
+    <img class="logo" src="../static/DEL_PRI_PMS368_weiss_neu.svg">
     <div class="chart-wrapper">
       <bubble
         :chart-data="datacollection"
