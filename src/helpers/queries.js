@@ -1,6 +1,7 @@
 const Fuse = require('fuse.js')
 const regression = require('regression')
 
+/*
 const styles = [
   { backgroundColor: '#de8288', borderColor: '#c0121d' }, // RED
   { backgroundColor: '#fdaf8f', borderColor: '#fc6d31' },
@@ -9,6 +10,17 @@ const styles = [
   { backgroundColor: '#e7e193', borderColor: '#cfc32b' },
   { backgroundColor: '#cbe5a5', borderColor: '#add670' },
   { backgroundColor: '#b1c78c', borderColor: '#6d9628' } // GREEN
+]
+*/
+
+const styles = [
+  { backgroundColor: '#b1c78c', borderColor: '#6d9628' }, // GREEN
+  { backgroundColor: '#cbe5a5', borderColor: '#add670' },
+  { backgroundColor: '#e7e193', borderColor: '#cfc32b' },
+  { backgroundColor: '#fef098', borderColor: '#fee440' },
+  { backgroundColor: '#fed393', borderColor: '#fdb244' },
+  { backgroundColor: '#fdaf8f', borderColor: '#fc6d31' },
+  { backgroundColor: '#de8288', borderColor: '#c0121d' } // RED
 ]
 
 const getDefaultDataset = () => [...Array(4).keys()]

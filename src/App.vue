@@ -14,6 +14,7 @@
     </div>
     <notifications group="lx" />
     <transition name="fade">
+
       <tooltip
         v-if="tooltipData"
         :tooltip-data="tooltipData"
@@ -23,6 +24,18 @@
         @mouseover.native="tooltipMouseOverHandler"
         @mouseleave.native="tooltipMouseLeaveHandler"
       />
+
+      <!--
+      <tooltip2
+        v-if="tooltipData"
+        :tooltip-data="tooltipData"
+        :tooltip-model="tooltipModel"
+        :canvas="canvas"
+        :currency="currency"
+        @mouseover.native="tooltipMouseOverHandler"
+        @mouseleave.native="tooltipMouseLeaveHandler"
+      />
+      -->
     </transition>
     <img class="logo" src="./assets/Deloitte-logo-black.svg">
     <div class="chart-wrapper">
@@ -37,6 +50,7 @@
 <script>
 import { getReportConfiguration } from './helpers/leanixReporting'
 import Bubble from './components/Bubble'
+import Tooltip2 from './components/Tooltip2'
 import Tooltip from './components/Tooltip'
 import Queries from './helpers/queries'
 import ExcelJS from 'exceljs/dist/es5/exceljs.browser'
@@ -44,7 +58,7 @@ import saveAs from 'file-saver'
 
 export default {
   name: 'App',
-  components: { Bubble, Tooltip },
+  components: { Bubble, Tooltip, Tooltip2 },
   data () {
     return {
       datacollection: null,
@@ -206,17 +220,29 @@ export default {
     align-items center
     height calc(100vh - 50px)
     position relative
+
   .actions-container
     position absolute
     top 0
-    left 0
+    right 0
 
   .logo
-    width 200px
-    margin 3rem
+    $img-width=250px
     position fixed
     top 0
-    right 0
+    left 0
+    width $img-width
+    border-radius 10px
+    // z-index 9999
+    background white
+    padding 2em
+    & > img
+      width $img-width
+    @media screen and (max-width: 800px)
+      right 60px
+      width 150px
+      & > img
+        width 150px
 
   .chart-wrapper
     width 80%

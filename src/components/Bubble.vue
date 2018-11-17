@@ -11,6 +11,7 @@ export default {
   },
   computed: {
     options () {
+      /*
       const {maxXKPI, xKPIBuckets = 4} = this.chartData && this.chartData.datasets ? this.chartData.datasets : {}
       const bucketSize = maxXKPI / xKPIBuckets
       const tags = maxXKPI && isFinite(maxXKPI)
@@ -23,6 +24,7 @@ export default {
             return `${round(lowerBound)} - ${round(upperBound)}`
           })
         : []
+      */
 
       return {
         responsive: true,
@@ -30,6 +32,7 @@ export default {
         legend: {
           display: false
         },
+        animation: false,
         tooltips: {
           enabled: false,
           custom: tooltipModel => this.$emit('tooltip', {tooltipModel, canvas: this.$refs.canvas})
@@ -48,11 +51,15 @@ export default {
                 min: 0,
                 max: 8,
                 padding: 10,
-                callback: (value, index, values) => tags[index]
+                callback: (value, index, values) => {
+                  const tags = [undefined, 'Low', undefined, 'Medium', undefined, 'High', undefined, 'Very High']
+                  return tags[index]
+                }
+                // callback: (value, index, values) => tags[index]
               },
               scaleLabel: {
                 display: true,
-                labelString: 'Weighted Cost',
+                labelString: 'Weighted Project Size',
                 fontStyle: '700',
                 fontSize: 13
               }
