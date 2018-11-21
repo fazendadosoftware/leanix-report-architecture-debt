@@ -20,7 +20,7 @@ describe('The queries', () => {
     await authenticator.stop()
   })
 
-  it('should delete all workspace factsheets', async () => {
+  xit('should delete all workspace factsheets', async () => {
     const query = '{allFactSheets{edges{node{id}}}}'
     let ids = await graphql
       .executeGraphQL(query)

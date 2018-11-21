@@ -1,18 +1,6 @@
 const Fuse = require('fuse.js')
 const regression = require('regression')
 
-/*
-const styles = [
-  { backgroundColor: '#de8288', borderColor: '#c0121d' }, // RED
-  { backgroundColor: '#fdaf8f', borderColor: '#fc6d31' },
-  { backgroundColor: '#fed393', borderColor: '#fdb244' },
-  { backgroundColor: '#fef098', borderColor: '#fee440' },
-  { backgroundColor: '#e7e193', borderColor: '#cfc32b' },
-  { backgroundColor: '#cbe5a5', borderColor: '#add670' },
-  { backgroundColor: '#b1c78c', borderColor: '#6d9628' } // GREEN
-]
-*/
-
 const styles = [
   { backgroundColor: '#b1c78c', borderColor: '#6d9628' }, // GREEN
   { backgroundColor: '#cbe5a5', borderColor: '#add670' },
@@ -30,7 +18,7 @@ const getDefaultDataset = () => [...Array(4).keys()]
     return { ...item, ...styles[item.x + item.y], data: [{ x: (item.x * 2) + 1, y: (item.y * 2) + 1, r: 0, businessCapabilities: [] }] }
   })
 
-export default class Queries {
+module.exports = class Queries {
   constructor (_lx) {
     this.lx = _lx || lx
     if (!this.lx) throw Error('LX object not found!')
@@ -83,7 +71,7 @@ export default class Queries {
             const projects = edge.node.projects.edges
               .map(edge => edge.node.factSheet)
               .filter(project => {
-                const isInPlanningPhase = project.lifecycle.asString === 'plan'
+                const isInPlanningPhase = project.lifecycle && project.lifecycle.asString === 'plan'
                 const hasTagOpportunityCost = project.tags.filter(tag => tag.tagGroup.id === this.opportunityCostTagGroup.id).length
                 return isInPlanningPhase && hasTagOpportunityCost
               })
