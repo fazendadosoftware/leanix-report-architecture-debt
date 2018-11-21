@@ -94,7 +94,7 @@ table
 
 .container
   position absolute
-  transition all 0.5s
+  transition all 0.3s
 
 .tooltip
   position absolute

@@ -1,4 +1,4 @@
-import Queries from '../src/helpers/queries'
+const Queries = require('../src/helpers/queries')
 const assert = require('chai').assert
 const ProgressBar = require('progress')
 const lxr = require('../lxr.json')
@@ -20,7 +20,7 @@ describe('The queries', () => {
     await authenticator.stop()
   })
 
-  it('should delete all workspace factsheets', async () => {
+  xit('should delete all workspace factsheets', async () => {
     const query = '{allFactSheets{edges{node{id}}}}'
     let ids = await graphql
       .executeGraphQL(query)

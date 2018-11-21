@@ -5,16 +5,20 @@ import Notifications from 'vue-notification'
 import App from './App'
 import LeanixVuePlugin from './plugins/LeanixVuePlugin'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faDownload, faSyncAlt } from '@fortawesome/free-solid-svg-icons'
+import { faDownload, faSyncAlt, faExternalLinkAlt, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import TableComponent from 'vue-tabl'
 
 library.add(faDownload)
 library.add(faSyncAlt)
+library.add(faExternalLinkAlt)
+library.add(faArrowLeft)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 Vue.use(LeanixVuePlugin)
 Vue.use(Notifications)
+Vue.use(TableComponent)
 
 Vue.config.productionTip = false
 

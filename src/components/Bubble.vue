@@ -5,10 +5,6 @@ const { reactiveProp } = mixins
 export default {
   extends: Bubble,
   mixins: [reactiveProp],
-  data () {
-    return {
-    }
-  },
   computed: {
     options () {
       /*
@@ -132,7 +128,8 @@ export default {
               }
             }
           ]
-        }
+        },
+        onClick: (evt, elements) => this.$emit('click', evt, elements)
       }
     }
   },

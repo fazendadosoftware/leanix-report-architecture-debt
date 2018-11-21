@@ -1,5 +1,11 @@
 <template>
   <div id="app" @click.stop="hideTooltip">
+    <bubble-modal
+      :show-modal="selectedBusinessCapabilities && selectedBusinessCapabilities.length"
+      @close="selectedBusinessCapabilities = undefined"
+      :business-capabilities="selectedBusinessCapabilities"
+      :currency="currency"
+      />
     <div class="actions-container">
       <transition-group name="fade" class="btn-group">
         <div :disabled="!canExport" class="btn btn-default" @click="exportToExcel" :key="'export'">
@@ -23,6 +29,7 @@
         :currency="currency"
         @mouseover.native="tooltipMouseOverHandler"
         @mouseleave.native="tooltipMouseLeaveHandler"
+        class="tooltip-container"
       />
 
       <!--
@@ -42,6 +49,7 @@
       <bubble
         :chart-data="datacollection"
         @tooltip="tooltipEventHandler"
+        @click="clickHandler"
         ref="chart"/>
     </div>
   </div>
@@ -49,6 +57,7 @@
 
 <script>
 import { getReportConfiguration } from './helpers/leanixReporting'
+import BubbleModal from './components/BubbleModal'
 import Bubble from './components/Bubble'
 import Tooltip2 from './components/Tooltip2'
 import Tooltip from './components/Tooltip'
@@ -58,9 +67,11 @@ import saveAs from 'file-saver'
 
 export default {
   name: 'App',
-  components: { Bubble, Tooltip, Tooltip2 },
+  components: { Bubble, BubbleModal, Tooltip, Tooltip2 },
   data () {
     return {
+      showModal: false,
+      selectedBusinessCapabilities: undefined,
       datacollection: null,
       tooltipData: undefined,
       tooltipModel: undefined,
@@ -112,6 +123,22 @@ export default {
         this.tooltipData = undefined
         this.tooltipModel = undefined
       }, 1000)
+    },
+    clickHandler (evt, elements) {
+      // console.log('catputed click', evt, elements)
+      const businessCapabilities = elements
+        .reduce((accumulator, element) => {
+          const businessCapabilities = this.datacollection.datasets[element._datasetIndex].data
+            .reduce((accumulator, item) => {
+              const { businessCapabilities } = item
+              return Array.from([...accumulator, ...businessCapabilities])
+            }, [])
+          return Array.from([...accumulator, ...businessCapabilities])
+        }, [])
+      const bcIndex = businessCapabilities.reduce((accumulator, bc) => { return { ...accumulator, [bc.id]: bc } }, {})
+      // console.log('businessCapabilities', bcIndex)
+      // this.showModal = true
+      this.selectedBusinessCapabilities = Object.values(bcIndex)
     },
     setFilter (filter) {
       this.filter = {
@@ -227,6 +254,7 @@ export default {
     right 0
 
   .logo
+    z-index 1
     $img-width=250px
     position fixed
     top 0
@@ -246,6 +274,11 @@ export default {
 
   .chart-wrapper
     width 80%
+    margin-top 100px
+    z-index 10
+
+  .tooltip-container
+    z-index 20
 
   .fade-enter-active, .fade-leave-active
     transition opacity .5s
