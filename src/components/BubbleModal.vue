@@ -2,40 +2,82 @@
   <modal v-if="show" @close="show = false">
     <span slot="header"/>
     <template slot="body">
-      <table-component
-        table-class="table-modal"
-        :show-filter="false"
-        :show-caption="false"
-        :data="rows">
-        <table-column>
-          <template slot-scope="row">
-            <div class="centered" @click="$lx.openLink(row.link, '_blank')">
-              <font-awesome-icon icon="external-link-alt" style="cursor:pointer; font-size: 1.2em"/>
-            </div>
-          </template>
-        </table-column>
-        <table-column label="Business Capability">
-          <template slot-scope="row">
-            <div class="centered">
-              <span>{{row.name}}</span>
-            </div>
-          </template>
-        </table-column>
-        <table-column label="Related Projects">
-          <template slot-scope="row">
-            <div class="centered">
-              <span>{{row.numProjects}}</span>
-            </div>
-          </template>
-        </table-column>
-        <table-column label="Total Cost of Related Projects">
-          <template slot-scope="row">
-            <div class="centered">
-              <span>{{currency.code}} {{row.sumBudgets}}</span>
-            </div>
-          </template>
-        </table-column>
-      </table-component>
+      <template v-if="!selectedBusinessCapability">
+        <table-component
+          table-class="table-modal"
+          :show-filter="false"
+          :show-caption="false"
+          :data="rows">
+          <table-column>
+            <template slot-scope="row">
+              <div class="centered link" @click="$lx.openLink(row.link, '_blank')">
+                <font-awesome-icon icon="external-link-alt" style="cursor:pointer; font-size: 1.2em"/>
+              </div>
+            </template>
+          </table-column>
+          <table-column label="Business Capability">
+            <template slot-scope="row">
+              <div class="centered link" @click="selectedBusinessCapability = row">
+                <span>{{row.name}}</span>
+              </div>
+            </template>
+          </table-column>
+          <table-column label="Related Projects">
+            <template slot-scope="row">
+              <div class="centered link" @click="selectedBusinessCapability = row">
+                <span>{{row.numProjects}}</span>
+              </div>
+            </template>
+          </table-column>
+          <table-column label="Total Cost of Related Projects">
+            <template slot-scope="row">
+              <div class="centered">
+                <span>{{currency.code}} {{row.sumBudgets}}</span>
+              </div>
+            </template>
+          </table-column>
+        </table-component>
+      </template>
+      <template v-if="selectedBusinessCapability">
+        <div style="display: flex; align-items: center; justify-content: start">
+          <font-awesome-icon icon="arrow-left" style="cursor:pointer; font-size: 1.2em; padding: 1em" @click="selectedBusinessCapability = undefined"/>
+          <h2>{{selectedBusinessCapability.name}}</h2>
+        </div>
+        <table-component
+          table-class="table-modal"
+          :show-filter="false"
+          :show-caption="false"
+          :data="selectedBusinessCapability.projects">
+          <table-column>
+            <template slot-scope="row">
+              <div class="centered" @click="$lx.openLink(row.link, '_blank')">
+                <font-awesome-icon icon="external-link-alt" style="cursor:pointer; font-size: 1.2em"/>
+              </div>
+            </template>
+          </table-column>
+          <table-column label="Project">
+            <template slot-scope="row">
+              <div class="centered">
+                <span>{{row.name}}</span>
+              </div>
+            </template>
+          </table-column>
+          <table-column label="Lifecycle">
+            <template slot-scope="row">
+              <div class="centered">
+                <span>{{row.lifecycle ? row.lifecycle.asString : row.lifecycle}}</span>
+              </div>
+            </template>
+          </table-column>
+          <table-column label="Project Cost">
+            <template slot-scope="row">
+              <div class="centered">
+                <span>{{currency.code}} {{row.budgetOpEx + row.budgetCapEx}}</span>
+              </div>
+            </template>
+          </table-column>
+        </table-component>
+      </template>
     </template>
     <span slot="footer"/>
   </modal>
@@ -47,21 +89,30 @@ import Modal from './Modal'
 export default {
   components: { Modal },
   props: ['showModal', 'businessCapabilities', 'currency'],
+  data () {
+    return {
+      selectedBusinessCapability: undefined
+    }
+  },
   computed: {
     show: {
       get () {
         return this.showModal
       },
       set (val) {
-        if (!val) this.$emit('close', val)
+        if (!val) {
+          this.selectedBusinessCapability = undefined
+          this.$emit('close', val)
+        }
       }
     },
     rows () {
       return (Array.isArray(this.businessCapabilities) ? this.businessCapabilities : [])
         .map(bc => {
-          const { id, name, projects, sumBudgets } = bc
+          let { id, name, projects, sumBudgets } = bc
           const link = `factsheet/BusinessCapability/${id}`
-          return { link, id, name, numProjects: projects.length, sumBudgets: sumBudgets.toFixed(1) }
+          projects = projects.map(project => { return { ...project, link: `factsheet/Project/${project.id}` } })
+          return { link, id, name, numProjects: projects.length, projects, sumBudgets: sumBudgets.toFixed(1) }
         })
     }
   },
@@ -72,10 +123,16 @@ export default {
 </script>
 
 <style lang="stylus">
+  @import '../stylus/material-color'
   @import '../stylus/table-component'
   .centered
     display flex
     justify-content center
     align-items center
     height 100%
+
+  .link
+    cursor pointer
+    // color clr-blue-800
+    text-decoration underline
 </style>
