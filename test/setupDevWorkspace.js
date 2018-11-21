@@ -1,4 +1,4 @@
-import Queries from '../src/helpers/queries'
+const Queries = require('../src/helpers/queries')
 const assert = require('chai').assert
 const ProgressBar = require('progress')
 const lxr = require('../lxr.json')
