@@ -3,6 +3,10 @@
     <span slot="header"/>
     <template slot="body">
       <template v-if="!selectedBusinessCapability">
+        <div style="padding: 1em; font-size: 1.5em">
+          <font-awesome-icon icon="arrow-left" style="cursor:pointer; margin-right: 1em" @click="show = false"/>
+          <b>Business Capabilities</b> with <b>{{labels.opportunityCost}} </b>Opportunity Cost and <b>{{labels.weightedProjectSize}}</b> Project Size
+        </div>
         <table-component
           table-class="table-modal"
           :show-filter="false"
@@ -39,9 +43,9 @@
         </table-component>
       </template>
       <template v-if="selectedBusinessCapability">
-        <div style="display: flex; align-items: center; justify-content: start">
-          <font-awesome-icon icon="arrow-left" style="cursor:pointer; font-size: 1.2em; padding: 1em" @click="selectedBusinessCapability = undefined"/>
-          <h2>{{selectedBusinessCapability.name}}</h2>
+        <div style="padding: 1em; font-size: 1.5em">
+          <font-awesome-icon icon="arrow-left" style="cursor:pointer; margin-right: 1em" @click="selectedBusinessCapability = undefined"/>
+          <b>Business Capability {{selectedBusinessCapability.name}}</b> (<b>{{labels.opportunityCost}} </b>Opportunity Cost and <b>{{labels.weightedProjectSize}}</b> Project Size)
         </div>
         <table-component
           table-class="table-modal"
@@ -109,11 +113,22 @@ export default {
     rows () {
       return (Array.isArray(this.businessCapabilities) ? this.businessCapabilities : [])
         .map(bc => {
-          let { id, name, projects, sumBudgets } = bc
+          let { id, name, projects, sumBudgets, xKPI, yKPI } = bc
           const link = `factsheet/BusinessCapability/${id}`
           projects = projects.map(project => { return { ...project, link: `factsheet/Project/${project.id}` } })
-          return { link, id, name, numProjects: projects.length, projects, sumBudgets: sumBudgets.toFixed(1) }
+          return { link, id, name, xKPI, yKPI, numProjects: projects.length, projects, sumBudgets: sumBudgets.toFixed(1) }
         })
+    },
+    labels () {
+      let opportunityCost
+      let weightedProjectSize
+      const labels = ['Low', 'Medium', 'High', 'Very High']
+      const row = Array.isArray(this.rows) && this.rows.length ? this.rows[0] : undefined
+      if (row) {
+        opportunityCost = labels[row.yKPI]
+        weightedProjectSize = labels[row.xKPI]
+      }
+      return { opportunityCost, weightedProjectSize }
     }
   },
   mounted () {
